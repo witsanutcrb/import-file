@@ -1,0 +1,32 @@
+{
+  "occupation_list": [
+    {
+      "tcrb_code": "17",
+      "mapping_code": "0787400112",
+      "employment_type": "02",
+      "business_sector": "0787500011",
+      "occupation_index": "02"
+    },
+    {
+      "tcrb_code": "17",
+      "mapping_code": "0787400112",
+      "employment_type": "02",
+      "business_sector": "0787500011",
+      "occupation_index": "03"
+    },
+    {
+      "tcrb_code": "25",
+      "mapping_code": "0787400112",
+      "employment_type": "02",
+      "business_sector": "0787500005",
+      "occupation_index": "14"
+    },
+    {
+      "tcrb_code": "25",
+      "mapping_code": "0787400112",
+      "employment_type": "01",
+      "business_sector": "0787500005",
+      "occupation_index": "20"
+    }
+  ]
+}

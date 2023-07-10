@@ -1,0 +1,200 @@
+[
+  {
+    "mappingFieldID": 336,
+    "condition": [
+      {
+        "conditionType": "lookup_relation",
+        "mappingFieldID": [336, 338, 339, 34115],
+        "operator": "EQUAL_TO",
+        "value": "occupation_list",
+        "expectedValue": "employment_type,tcrb_code,mapping_code,business_sector,occupation_index",
+        "responseMsg": "Occupation Fields is not Relate or Data out of bound"
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 338,
+    "condition": [
+      {
+        "conditionType": "lookup_relation",
+        "mappingFieldID": [336, 338, 339, 34115],
+        "operator": "EQUAL_TO",
+        "value": "occupation_list",
+        "expectedValue": "employment_type,tcrb_code,mapping_code,business_sector,occupation_index",
+        "responseMsg": "Occupation Fields is not Relate or Data out of bound"
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 339,
+    "condition": [
+      {
+        "conditionType": "lookup_relation",
+        "mappingFieldID": [336, 338, 339, 34115],
+        "operator": "EQUAL_TO",
+        "value": "occupation_list",
+        "expectedValue": "employment_type,tcrb_code,mapping_code,business_sector,occupation_index",
+        "responseMsg": "Occupation Fields is not Relate or Data out of bound"
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 34115,
+    "condition": [
+      {
+        "conditionType": "lookup_relation",
+        "mappingFieldID": [336, 338, 339, 34115],
+        "operator": "EQUAL_TO",
+        "value": "occupation_list",
+        "expectedValue": "employment_type,tcrb_code,mapping_code,business_sector,occupation_index",
+        "responseMsg": "Occupation Fields is not Relate or Data out of bound"
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 278,
+    "condition": [
+      {
+        "conditionType": "daterelation",
+        "mappingFieldID": 301,
+        "operator": "LESS_THAN",
+        "value": "",
+        "expectedOperator": "LESS_THAN",
+        "expectedValue": "",
+        "responseMsg": "When Applied Date > Date approve, This field is correct."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 278,
+    "condition": [
+      {
+        "conditionType": "date_compare_current",
+        "mappingFieldID": 278,
+        "operator": "LESS_THAN",
+        "value": "",
+        "expectedOperator": "LESS_THAN",
+        "expectedValue": "",
+        "responseMsg": "When Applied Date > Current Date, This field is incorrect."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 37,
+    "condition": [
+      {
+        "conditionType": "relation",
+        "mappingFieldID": [36],
+        "operator": "EQUAL_TO",
+        "value": "02",
+        "expectedOperator": "NOT_EQUAL_TO",
+        "expectedValue": "",
+        "responseMsg": "When Employment Type = 02, This field is mandatory."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 580,
+    "condition": [
+      {
+        "conditionType": "relation",
+        "mappingFieldID": [581, 582],
+        "operator": "NOT_EQUAL_TO",
+        "value": "",
+        "expectedOperator": "EQUAL_TO",
+        "expectedValue": "001",
+        "responseMsg": "Field default value '001' is incorrect."
+      },
+      {
+        "conditionType": "relation",
+        "mappingFieldID": [581, 582],
+        "operator": "EQUAL_TO",
+        "value": "",
+        "expectedOperator": "EQUAL_TO",
+        "expectedValue": "000",
+        "responseMsg": "Field default value '000' is incorrect."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 43,
+    "condition": [
+      {
+        "conditionType": "maxvalue",
+        "mappingFieldID": [41, 42],
+        "operator": "EQUAL_TO",
+        "value": "",
+        "expectedValue": "Max",
+        "responseMsg": "Final income shoude be maximum value between income proxy and income verify"
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 51,
+    "condition": [
+      {
+        "conditionType": "compare",
+        "mappingFieldID": 53,
+        "operator": "GREATER_THAN_OR_EQUAL_TO",
+        "value": "01",
+        "expectedValue": "",
+        "responseMsg": "This field needs to be value >= OS Installment Amount."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 52,
+    "condition": [
+      {
+        "conditionType": "mandatory",
+        "mappingFieldID": "58",
+        "operator": "NOT_EQUAL_TO",
+        "value": "",
+        "expectedValue": "",
+        "responseMsg": "Field mandatory is missing"
+      },
+      {
+        "conditionType": "compare",
+        "mappingFieldID": 54,
+        "operator": "EQUAL_TO",
+        "value": "",
+        "expectedValue": "",
+        "responseMsg": "This field needs to be value  >= OS Term."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 53,
+    "condition": [
+      {
+        "conditionType": "compare",
+        "mappingFieldID": 51,
+        "operator": "LESS_THAN_OR_EQUAL_TO",
+        "value": "01",
+        "expectedValue": "",
+        "responseMsg": "This field needs to be value <= Approved Installment Amt."
+      }
+    ]
+  },
+  {
+    "mappingFieldID": 54,
+    "condition": [
+      {
+        "conditionType": "mandatory",
+        "mappingFieldID": 58,
+        "operator": "NOT_EQUAL_TO",
+        "value": "",
+        "expectedValue": "",
+        "responseMsg": "Field mandatory is missing"
+      },
+      {
+        "conditionType": "compare",
+        "mappingFieldID": 52,
+        "operator": "LESS_THAN_OR_EQUAL_TO",
+        "value": "",
+        "expectedValue": "",
+        "responseMsg": "This field needs to be value <= Approved Term."
+      }
+    ]
+  }
+]

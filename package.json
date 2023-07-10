@@ -1,0 +1,40 @@
+{
+  "name": "import-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
+    "jest": "^27.2.4",
+    "jest-sonar-reporter": "^2.0.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-ecs": "^3.364.0",
+    "@aws-sdk/client-s3": "^3.362.0",
+    "@aws-sdk/client-secrets-manager": "^3.362.0",
+    "axios": "^1.4.0",
+    "csv-parse": "^5.4.0",
+    "csv-stringify": "^6.4.0",
+    "gpg": "^0.6.0",
+    "mathjs": "^11.8.2",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "openpgp": "^5.9.0",
+    "pg": "^8.11.1",
+    "rambda": "^8.0.0",
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6"
+  }
+}
