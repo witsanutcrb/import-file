@@ -2,12 +2,15 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-param-reassign */
 /* eslint-disable guard-for-in */
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 const nodemailer = require('nodemailer');
 const { ActivityLogger } = require('./utility/utility/logging');
-const EmailRepo = require('../../messaging-repository/src/EmailMessageRepository');
+const EmailRepo = require('../../messaging-repository/src/EmailMessageRepository'); //can't find this path
 
-AWS.config.update({ region: 'ap-southeast-1' });
+const aws = require('@aws-sdk/client-ses');
+const { defaultProvider } = require('@aws-sdk/credential-provider-node');
+
+// AWS.config.update({ region: 'ap-southeast-1' });
 const { AWS_ACCOUNT_ID } = process.env;
 
 const logger = new ActivityLogger(AWS_ACCOUNT_ID);
@@ -128,18 +131,26 @@ class SendEmailService {
 
       // Get file from S3
       const attachments = [];
-      const s3 = new AWS.S3();
-      await this.firstCondition(bucketName, s3FilePath, attachments, s3);
-      await this.secondCondition(
-        errorBucketName,
-        s3FileErrorPath,
-        attachments,
-        s3,
-      );
+      // const s3 = new AWS.S3();
+      // await this.firstCondition(bucketName, s3FilePath, attachments, s3);
+      // await this.secondCondition(
+      //   errorBucketName,
+      //   s3FileErrorPath,
+      //   attachments,
+      //   s3,
+      // );
+
+      const ses = new aws.SES({
+        apiVersion: '2010-12-01',
+        region: 'ap-southeast-1',
+        defaultProvider,
+      });
+
+      // create Nodemailer SES transporter
 
       // Send SES
       const transporter = nodemailer.createTransport({
-        SES: new AWS.SES(),
+        SES: { ses, aws },
         secure: true,
       });
 

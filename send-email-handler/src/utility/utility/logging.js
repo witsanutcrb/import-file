@@ -3,28 +3,27 @@ const AWS_REGION = process.env.AWS_REGION || 'ap-southeast-1';
 const TIMEZONE = 'Asia/Bangkok';
 const DATETIMEFORMAT = 'YYYY-MM-DD HH:mm:ss';
 
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 const { v4: uuid } = require('uuid');
 const moment = require('moment-timezone');
 const OBGenerator = require('../helper/OBGenerator');
+const { SQSClient, SendMessageCommand } = require('@aws-sdk/client-sqs');
 
 const obGenerator = new OBGenerator();
-const sqs = new AWS.SQS({ region: AWS_REGION });
+// const sqs = new AWS.SQS({ region: AWS_REGION });
 
-const sendSqs = (accountId, activity) => {
+const client = new SQSClient({ region: AWS_REGION });
+
+const sendSqs = async (accountId, activity) => {
   const url = `https://sqs.${AWS_REGION}.amazonaws.com/${accountId}/activity`;
-  return new Promise((resolve, reject) => {
-    sqs.sendMessage(
-      {
-        QueueUrl: url,
-        MessageBody: JSON.stringify(activity),
-      },
-      (err, data) => {
-        if (err) reject(err);
-        resolve(data);
-      },
-    );
-  });
+  const params = {
+    QueueUrl: url,
+    MessageBody: JSON.stringify(activity),
+  };
+  const command = new SendMessageCommand(params);
+  const response = await client.send(command);
+
+  return response;
 };
 
 class ActivityLogger {

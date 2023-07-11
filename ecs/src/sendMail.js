@@ -1,12 +1,13 @@
 const momenttz = require('moment-timezone');
+const { resultStatusCode } = require('../../constructor/enums');
 
-// const { sendEmail } = require('../../send-email-handler/src/sendEmail');
+const { sendEmail } = require('../../send-email-handler/src/sendEmail');
 
 const sendMail = async (
   {
     fileNameToMail,
     errorStack,
-    CatchError,
+    catchError,
     total_record,
     pass_records,
     failed_records,
@@ -17,18 +18,18 @@ const sendMail = async (
   console.log(
     fileNameToMail,
     errorStack,
-    CatchError,
+    catchError,
     total_record,
     pass_records,
     failed_records,
     start_time,
   );
-  return true;
+  // return true;
   await sendEmail(
     {
       code_complate: 'EMAIL0106',
       code_failed: 'EMAIL0107',
-      process_name: 'Reach90',
+      process_name: 'Assign Customer',
       date: momenttz().tz(process.env.TIMEZONE).format('DD/MM/YYYY HH:mm:ss'),
       start_time:
         start_time ||
@@ -38,7 +39,7 @@ const sendMail = async (
         .format('DD/MM/YYYY HH:mm:ss'),
       filename: `\n${fileNameToMail}`,
       errorStack,
-      file_summary_status: CatchError
+      file_summary_status: catchError
         ? resultStatusCode.error
         : resultStatusCode.complete,
       totalrecord: total_record,

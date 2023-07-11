@@ -222,10 +222,10 @@ const saveSummary = async (data) => {
   }
 };
 
-
-
 const taskProcessing = async ({ groupRefCode }) => {
-  const start_time = momenttz().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
+  const start_time = momenttz()
+    .tz(process.env.TIMEZONE)
+    .format(process.env.DATETIMEFORMAT);
   const { S3_BUCKET, OBJECT_NAME } = process.env;
   const s3Bucket = S3_BUCKET;
   const objectName = OBJECT_NAME;
@@ -317,36 +317,35 @@ const taskProcessing = async ({ groupRefCode }) => {
       bucketName: s3BucketOutput,
       fileKey: s3OutputFile,
       destBucketName: s3BucketBof,
-      destFileKey: s3PathBof+"/"+fileNameData
+      destFileKey: s3PathBof + '/' + fileNameData,
     });
 
     await copyFileToS3({
       bucketName: s3BucketOutput,
       fileKey: s3OutputFileCtrl,
       destBucketName: s3BucketBof,
-      destFileKey: s3PathBof+"/"+fileNameCtrl
+      destFileKey: s3PathBof + '/' + fileNameCtrl,
     });
 
     await moveFileS3({
       bucketName: s3BucketOutput,
-      fileKey: s3OutputFile ,
+      fileKey: s3OutputFile,
       destBucketName: s3BucketOutput,
       destFileKey: convertPathS3({
-        s3Path: s3OutputFile
+        s3Path: s3OutputFile,
       }),
     });
 
     await moveFileS3({
       bucketName: s3BucketOutput,
-      fileKey: s3OutputFileCtrl ,
+      fileKey: s3OutputFileCtrl,
       destBucketName: s3BucketOutput,
       destFileKey: convertPathS3({
-        s3Path: s3OutputFileCtrl
+        s3Path: s3OutputFileCtrl,
       }),
     });
 
     //move file to BOF//
-
 
     // await moveFileS3({
     //   bucketName: s3Bucket,
@@ -367,41 +366,30 @@ const taskProcessing = async ({ groupRefCode }) => {
     // });
 
     fs.unlinkSync(fileDataPath);
-
-    const date = momenttz().tz(process.env.TIMEZONE).format("YYYY-MM-DD")
-    const time = momenttz().tz(process.env.TIMEZONE).format("HH:mm:ss")
-    const end_time = momenttz().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
+    const end_time = momenttz()
+      .tz(process.env.TIMEZONE)
+      .format(process.env.DATETIMEFORMAT);
 
     const objSummary = {
-      file_name : fileNameData ,
-      processing_date :  date ,// moment().tz(process.env.TIMEZONE).format(YYYY-MM-DD)
-      processing_time : time, // moment = time // moment().tz(process.env.TIMEZONE).format(HH:mm:ss)
-      channel_code : "OLA", 
-      round_number : null,
-      file_type : getFileControl.file_type,
-      file_path :getFileControl.file_path,
-      total_record : totalRecordFile, //ใส่ total record
-      pass_record : totalRecordFile, //ใส่ total record
-      failed_record : 0, //ใส่ 0
-      start_time : start_time, // ใส่เวลาเริ่มการทำงาน// moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
-      end_time : end_time, // ใส่เวลาสิ้นสุดการทำงาน// moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
-      created_on : end_time,// moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
-      updated_on : end_time,// moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
-      created_by : "SYSTEM",
-      updated_by : "SYSTEM",
-      file_summary_status : "complete",
-      read_record : totalRecordFile, //ใส่ total record
-      error_code : null, //if error ให้เอามาใส่
-      group_ref_code :  groupRefCode
-  }
+      file_name: fileNameData,
+      file_type: getFileControl.file_type,
+      file_path: getFileControl.file_path,
+      total_record: totalRecordFile, //ใส่ total record
+      pass_record: totalRecordFile, //ใส่ total record
+      failed_record: 0, //ใส่ 0
+      end_time: end_time, // ใส่เวลาสิ้นสุดการทำงาน// moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
+      updated_on: end_time, // moment().tz(process.env.TIMEZONE).format(process.env.DATETIMEFORMAT)
+      updated_by: 'SYSTEM',
+      file_summary_status: 'complete',
+      read_record: totalRecordFile, //ใส่ total record
+      group_ref_code: groupRefCode,
+    };
 
-  await saveSummary(objSummary)
-
+    await saveSummary(objSummary);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
 module.exports = { taskProcessing };
-
-
